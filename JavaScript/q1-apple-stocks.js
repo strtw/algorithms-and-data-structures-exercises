@@ -18,25 +18,26 @@
 //var stockPricesYesterday = [10, 7, 5, 8, 11, 9];
 var stockPricesYesterday = [10, 8, 1, 5];
 
-
 function getMaxProfit(array){
-    var posResult = 0, negResult;
-    for(let i = 0; i < array.length-1;i++){
-        for(let j = i + 1; j < array.length ; j++ ){
-            if(array[j] - array[i] > 0 && array[j] - array[i] > posResult){
-                posResult = array[j] - array[i];
-            };
-            if(negResult === undefined && array[j] < array[i]){
-                negResult = array[j] - array[i];
-            }else if(array[j] < array[i] && Math.abs(array[j] - array[i]) < Math.abs(negResult)){
-                negResult = array[j] - array[i];
-            };
+    var posResult = 0,
+        negResult = Number.NEGATIVE_INFINITY, //set
+        current = array[0],
+        result;
+
+    array.forEach(function(value, index){
+        if(current < value && posResult < value - current){
+            posResult = value - current;
+        }else if(value < current && negResult < value - current ){
+            negResult = value - current;
         }
+        current = value;
+    })
+
+    if(negResult === Number.NEGATIVE_INFINITY){
+        negResult = 0; // if buy and sell price is same
     }
 
-    console.log(posResult > 0 ? posResult : negResult);
-    return posResult > 0 ? posResult : negResult;
+    return  posResult > 0 ? posResult : negResult;
 }
 
 getMaxProfit(stockPricesYesterday);
-// returns 6 (buying for $5 and selling for $11)
