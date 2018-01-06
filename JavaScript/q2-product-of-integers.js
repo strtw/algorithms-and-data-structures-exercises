@@ -27,16 +27,21 @@ Division is not allowed in solution
 //For each index in the array (outer loop) set that index to 1
 // and multiply it by every index in the array (inner loop)
 // when inner loop reaches the original value index of outer loop index,
-// set inner value to 1 so product doesn't increase.
+// set inner value to 1 so product doesn't increase. A count is maintained for
+// last step to ensure that the inner index is set to 1 only once for any
+// given outer value
 function getProductsOfAllIntsExceptAtIndex(array){
     var result = [],
-        originalOuterValue;
+        originalOuterValue,
+        count;
     array.forEach(function(outerValue){
+        count = 0;
         originalOuterValue = outerValue;//keep track of outer value
         outerValue = 1;//set to one so product doesn't increase
         array.forEach(function(innerValue){
-            if(innerValue === originalOuterValue){
+            if(innerValue === originalOuterValue && count <1 ){
                 innerValue = 1; //set to one so product doesn't increase
+                count++ ;
             }
             outerValue *= innerValue;//multiply
         });
@@ -46,4 +51,4 @@ function getProductsOfAllIntsExceptAtIndex(array){
     return result;
 }
 
-getProductsOfAllIntsExceptAtIndex([1, 7, 3, 4]);
+getProductsOfAllIntsExceptAtIndex([1, 1, 1, 1]);
