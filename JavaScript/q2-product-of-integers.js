@@ -22,7 +22,7 @@ by calculating:
 Division is not allowed in solution
     */
 
-//[84, 12, 28, 21]
+//
 
 //For each index in the array (outer loop) set that index to 1
 // and multiply it by every index in the array (inner loop)
@@ -30,25 +30,87 @@ Division is not allowed in solution
 // set inner value to 1 so product doesn't increase. A count is maintained for
 // last step to ensure that the inner index is set to 1 only once for any
 // given outer value
-function getProductsOfAllIntsExceptAtIndex(array){
+/*function getProductsOfAllIntsExceptAtIndex(array){
     var result = [],
-        originalOuterValue,
-        count;
-    array.forEach(function(outerValue){
+        excludedValue,
+        count,
+        product;
+    array.forEach(function(excludedValue){
         count = 0;
-        originalOuterValue = outerValue;//keep track of outer value
-        outerValue = 1;//set to one so product doesn't increase
-        array.forEach(function(innerValue){
-            if(innerValue === originalOuterValue && count <1 ){
-                innerValue = 1; //set to one so product doesn't increase
+        originalValue = excludedValue;//keep track of outer value
+        excludedValue = 1;//set to one so product doesn't increase when multipled by other indices
+        array.forEach(function(includedValue){
+            if(includedValue === originalValue && count <1 ){//the first time the loop encounters the value to be excluded
+                includedValue = 1; //set to one so product doesn't increase when multipled
                 count++ ;
             }
-            outerValue *= innerValue;//multiply
+            excludedValue *= includedValue;//multiply
         });
-        result.push(outerValue);
+        result.push(excludedValue);
 
     });
     return result;
+}*/
+
+//  [84, 12, 28, 21]
+
+window.onload = function(){
+    getProductsOfAllIntsExceptAtIndex([1,7,3,4]);
 }
 
-getProductsOfAllIntsExceptAtIndex([1, 1, 1, 1]);
+function getProductsOfAllIntsExceptAtIndex(array){
+    var before = getProductsBeforeIndex(array);
+    var after = getProductsAfterIndex(array);
+    var result = [];
+    var product = 1;
+    array.forEach(function(value,index,array){
+        var beforeIndex = isNaN(before[index-1])? 1 : before[index-1];
+        var afterIndex = isNaN(after[index+1])? 1 : after[index+1];
+        product = beforeIndex * afterIndex;
+        result.push(product);
+    })
+    return result;
+}
+
+function getProductsBeforeIndex(array){
+    var product = 1;
+    var result = [];
+    array.forEach(function(value){
+        product *= value;
+        result.push(product);
+    })
+    return result;
+}
+
+function getProductsAfterIndex(array){
+    var product = 1;
+    var result = [];
+    for(let i = array.length-1; i >=0; i--){
+        product *= array[i];
+        result.unshift(product);
+    }
+    return result;
+}
+
+
+//5 * 2 * 8 * 9   
+//10 * 2 * 8 * 9
+//10 * 5 * 8 * 9
+//10 * 5 * 2 * 9
+//10 * 5 * 2 * 8
+
+
+
+/*
+0,7,3,4 = 84,0,0,0
+
+ 2*5*6, 1*5*6,1*2*6,1*2*5
+
+
+
+
+
+*/
+
+
+
