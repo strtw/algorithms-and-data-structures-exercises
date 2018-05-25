@@ -62,10 +62,10 @@ function getProductsOfAllIntsExceptAtIndex(array){
     var before = getProductsBeforeIndex(array);
     var after = getProductsAfterIndex(array);
     var result = [];
-    var product = 1;
+    var product = 1;//intitial product
     array.forEach(function(value,index,array){
-        var beforeIndex = isNaN(before[index-1])? 1 : before[index-1];
-        var afterIndex = isNaN(after[index+1])? 1 : after[index+1];
+        var beforeIndex = isNaN(before[index-1])? 1 : before[index-1];//set to 1 if referenced index is < 0
+        var afterIndex = isNaN(after[index+1])? 1 : after[index+1];//set to 1 if referenced index is > than index length
         product = beforeIndex * afterIndex;
         result.push(product);
     })
