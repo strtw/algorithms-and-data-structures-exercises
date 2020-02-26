@@ -45,18 +45,16 @@ function reverseWords(message){
     var endIndex;
 
     reverseChars(message, 0, message.length-1) // reverse all the characters
+    message.push(" ");
    
     for(let i = 0; i < message.length ; i++){
-        if(message[i] === ' ' || i === message.length - 1){ //find a word boundary which is space or end of array
+        if(message[i] === ' '){ //find a word boundary which is space or end of array
             endIndex = i - 1; //set the end index of the word to the character before the space
-            if(i === message.length - 1){ //if we have reached the end of the array
-                endIndex = message.length - 1; //set the end index to the last character
-            }
-           
             reverseChars(message,startIndex,endIndex)  //reverse the characters 
             startIndex = i + 1 //set the next start index
         }
     }
+    message.pop()
     console.log(message)
 }
 
