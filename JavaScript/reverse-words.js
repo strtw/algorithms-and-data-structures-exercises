@@ -41,20 +41,21 @@ function reverseChars(array,startIndex,endIndex){ //This approach uses in place 
 
 function reverseWords(message){
 
-    reverseChars(message, 0, message.length-1) // reverse all the characters
-    var index = [0]; //set a new array to hold the indexes of first and last work, and space delimeters
-    for(let i = 0; i < message.length ; i++){
-        if(message[i] === ' '){
-            index.push(i) //add the locations of spaces to the index
-        }
-    }
-    index.push(message.length) //add the length of the array to the index
     var startIndex = 0 //because this is the beginning of the first word
-    var endIndex = index[1] - 1 //the character before the first space is the last character of the first word
-    for(let i = 0; i < index.length; i++){
-        reverseChars(message,startIndex,endIndex) 
-        startIndex = index[i + 1] + 1 //the position of the next space, plus one character is the beginning of the next word
-        endIndex = index[i + 2] - 1 //the position of the next space, minus one is the end of the next word
+    var endIndex;
+
+    reverseChars(message, 0, message.length-1) // reverse all the characters
+   
+    for(let i = 0; i < message.length ; i++){
+        if(message[i] === ' ' || i === message.length - 1){ //find a word boundary which is space or end of array
+            endIndex = i - 1; //set the end index of the word to the character before the space
+            if(i === message.length - 1){ //if we have reached the end of the array
+                endIndex = message.length - 1; //set the end index to the last character
+            }
+           
+            reverseChars(message,startIndex,endIndex)  //reverse the characters 
+            startIndex = i + 1 //set the next start index
+        }
     }
     console.log(message)
 }
