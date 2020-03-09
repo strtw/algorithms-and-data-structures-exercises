@@ -3,39 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="JavaScript/product_of_three.js"></script>
+    <script src="JavaScript/cafe-order-checker.js"></script>
 </head>
 <body>
-<!--<script>
-    //[84, 12, 28, 21]
+<script>
+    /*
+    //this does it but using existing methods
+   function reverseInPlace(array){
+       var lastItem;
+        for(let i = 0; i < array.length;i++){
+            lastItem = array.pop()
+            array.splice(i,0,lastItem)
+        }
+        console.log(array);
+   }*/
 
-    //For each index in the array (outer loop) set that index to 1
-    // and multiply it by every index in the array (inner loop)
-    // when inner loop reaches the original value index of outer loop index,
-    // set inner value to 1 so product doesn't increase.
-    function getProductsOfAllIntsExceptAtIndex(array){
-        var result = [],
-            originalOuterValue,
-            count;
-        array.forEach(function(outerValue){
-            count = 0;
-            originalOuterValue = outerValue;//keep track of outer value
-            outerValue = 1;//set to one so product doesn't increase
-            array.forEach(function(innerValue){
-                if(innerValue === originalOuterValue && count <1 ){
-                    innerValue = 1; //set to one so product doesn't increase
-                    count++ ;
-                }
-                outerValue *= innerValue;//multiply
-            });
-            result.push(outerValue);
+  /* function reverseInPlace(array){
+       var leftIndex = 0;
+       var rightIndex = array.length-1;
+       var temp;
+       while(leftIndex < rightIndex){
+            temp = array[leftIndex];
+            array[leftIndex] = array[rightIndex];
+            array[rightIndex] = temp;
+            leftIndex++;
+            rightIndex--
+       }
 
-        });
-        return result;
     }
 
-    getProductsOfAllIntsExceptAtIndex([2, 3, 3, 4]);
+
+    var cow = ['c','a','t','a','m'];
+    reverseInPlace(cow);
+
+    console.log(cow);
+*/
 </script>
--->
 </body>
 </html>
