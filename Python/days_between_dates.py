@@ -13,10 +13,27 @@ def daysBetweenDates(year1,month1,day1,year2,month2,day2):
     currentDate = year1,month1,day1 
     endDate = year2,month2,day2
     days = 0
-    while(currentDate < endDate): 
-        currentDate = nextDay(*currentDate)
+    while dateIsBefore(year1,month1,day1,year2,month2,day2): 
+        year1,month1,day1 = nextDay(year1,month1,day1)
         days += 1
+    print(days)
     return days
+
+def dateIsBefore(year1,month1,day1,year2,month2,day2):
+    result = False
+    if(year1 < year2):
+        result = True
+    if(year1 == year2):
+        if month1 < month2:
+            result = True
+        if month1 == month2:
+            if day1 < day2:
+                    result = True
+    return result
+
+dateIsBefore(2000,1,1,2000,1,3) #True
+dateIsBefore(2000,1,3,2000,1,1)#False
+dateIsBefore(2000,1,3,2000,1,3)#False
 
 
 def nextDay(year, month, day):
@@ -29,4 +46,4 @@ def nextDay(year, month, day):
             return year + 1,1,1
 
 
-daysBetweenDates(2000,1,1,2000,1,3)
+daysBetweenDates(2000,1,1,2000,1,5)
