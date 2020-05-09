@@ -45,4 +45,5 @@ def nextDay(year, month, day):
             return year + 1,1,1
 
 
-daysBetweenDates(2000,1,1,2001,1,1)
+daysBetweenDates(2000,1,1,2001,1,1)#365
+daysBetweenDates(2000,1,1,2001,1,30)#29
