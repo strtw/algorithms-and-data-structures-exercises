@@ -47,7 +47,24 @@ def nextDay(year, month, day):
             return year + 1,1,1
 
 def isLeapYear(year):
-    return True
+    isCenturyYear = year % 100 == 0 #Divisible by 100
+    divisibleByFour = year % 4 == 0 #Divisible by 4, leap year in most cases
+    divisibleBy400 = year % 400 == 0 
+    leapYearException = isCenturyYear and not divisibleBy400
+    
+    if(divisibleByFour):
+        leapYear = True
+        if(leapYearException):
+            leapYear = False
+    else: leapYear = False
+    return leapYear
+    
+        
+print(isLeapYear(2000))#True
+print(isLeapYear(2004))#True
+print(isLeapYear(2008))#True
+print(isLeapYear(2001))#False
+print(isLeapYear(2100))#False
 
 daysBetweenDates(2000,1,1,2001,1,1)#365
 daysBetweenDates(2000,1,1,2000,1,30)#29
