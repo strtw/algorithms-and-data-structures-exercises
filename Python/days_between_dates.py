@@ -52,12 +52,10 @@ def isLeapYear(year):
     divisibleBy400 = year % 400 == 0 
     leapYearException = isCenturyYear and not divisibleBy400
     
-    if(divisibleByFour):
-        leapYear = True
-        if(leapYearException):
-            leapYear = False
-    else: leapYear = False
-    return leapYear
+    if(divisibleByFour and not leapYearException):
+        return True
+    else: 
+        return False
     
         
 print(isLeapYear(2000))#True
