@@ -31,12 +31,14 @@ def dateIsBefore(year1,month1,day1,year2,month2,day2):
                     result = True
     return result
 
-def daysInMonth(month):
+def daysInMonth(month,year):
     months = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
+    if(isLeapYear(year) and month == 2):
+        months[2] = 29
     return months[month]
 
 def nextDay(year, month, day):
-    if day < daysInMonth(month):
+    if day < daysInMonth(month,year):
         return year,month, day + 1
     else:
         if month < 12:
@@ -44,6 +46,8 @@ def nextDay(year, month, day):
         else:
             return year + 1,1,1
 
+def isLeapYear(year):
+    return True
 
 daysBetweenDates(2000,1,1,2001,1,1)#365
-daysBetweenDates(2000,1,1,2001,1,30)#29
+daysBetweenDates(2000,1,1,2000,1,30)#29
