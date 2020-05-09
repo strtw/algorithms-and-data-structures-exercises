@@ -10,9 +10,9 @@
 ### correct results given a correct nextDay procedure
 
 def daysBetweenDates(year1,month1,day1,year2,month2,day2):
-    currentDate = year1,month1,day1 
-    endDate = year2,month2,day2
     days = 0
+    #force an incorrect result to be true, then flip it to false to trigger an assertion error
+    assert  not dateIsBefore(year2, month2, day2, year1, month1, day1) 
     while dateIsBefore(year1,month1,day1,year2,month2,day2): 
         year1,month1,day1 = nextDay(year1,month1,day1)
         days += 1
@@ -31,13 +31,12 @@ def dateIsBefore(year1,month1,day1,year2,month2,day2):
                     result = True
     return result
 
-dateIsBefore(2000,1,1,2000,1,3) #True
-dateIsBefore(2000,1,3,2000,1,1)#False
-dateIsBefore(2000,1,3,2000,1,3)#False
-
+def daysInMonth(month):
+    months = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
+    return months[month]
 
 def nextDay(year, month, day):
-    if day < 30:
+    if day < daysInMonth(month):
         return year,month, day + 1
     else:
         if month < 12:
@@ -46,4 +45,4 @@ def nextDay(year, month, day):
             return year + 1,1,1
 
 
-daysBetweenDates(2000,1,1,2000,1,5)
+daysBetweenDates(2000,1,1,2001,1,1)
