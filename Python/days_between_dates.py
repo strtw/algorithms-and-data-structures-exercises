@@ -57,12 +57,6 @@ def isLeapYear(year):
     else: 
         return False
     
-        
-print(isLeapYear(2000))#True
-print(isLeapYear(2004))#True
-print(isLeapYear(2008))#True
-print(isLeapYear(2001))#False
-print(isLeapYear(2100))#False
-
-daysBetweenDates(2000,1,1,2001,1,1)#365
+daysBetweenDates(2000,1,1,2001,1,1)#366
+daysBetweenDates(2001,1,1,2002,1,1)#365
 daysBetweenDates(2000,1,1,2000,1,30)#29
