@@ -6,12 +6,16 @@ class Node:
 
 def create_linked_list(input_list):
     head = None
-    if(len(input_list) >= 2):#Make sure the list is at least two items long (head and tail)
-        head = Node(input_list[0])
-        tail = Node(input_list[1])
-        head.next = tail #link the tail to the head
-        for value in input_list[2:]:#Start at third item in list
-            tail.next = Node(value) #Create a new tail
+    tail = None
+    for value in input_list:
+        if head is None:
+            head = Node(value) 
+        elif tail is None:
+            tail = Node(value)
+            head.next = tail
+        else:
+        # Move to the tail (the last node)
+            tail.next = Node(value)
     return head
         
 
