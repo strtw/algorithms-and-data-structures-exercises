@@ -124,7 +124,6 @@ function removeDuplicates(input){
      result.push(deduped[i].character) //add the sorted characters to the result array
  }
  result = result.join('') //join into string
- console.log(result)
  return result;
 }
 
