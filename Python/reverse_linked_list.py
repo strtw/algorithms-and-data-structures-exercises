@@ -42,4 +42,6 @@ myList.append(1)
 myList.append(2)
 myList.append(3)
 
-reverse_list(myList)
+flipped = reverse_list(myList)
+is_correct = list(flipped) == list([3,2,1]) and list(myList) == list(reverse_list(flipped))
+print("Pass" if is_correct else "Fail")
