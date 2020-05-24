@@ -96,19 +96,27 @@ second_linked_list = LinkedList(Node(2))
 second_linked_list.append(4)
 second_linked_list.append(8)
 
-solution = merge(second_linked_list,linked_list)
-
 expected_list = [1,2,3,4,5,8] # <-- Python list
-
-# Convert the "solution" into a Python list and compare with another Python list
-assert solution.to_list() == expected_list, f"list contents: {solution.to_list()}"
-    
-    
-    
 
 
 ''' In a NESTED LinkedList object, each node will be a simple LinkedList in itself'''
 class NestedLinkedList(LinkedList):
     def flatten(self):
         # TODO: Implement this method to flatten the linked list in ascending sorted order.
-        return
+        resultList = self.head
+        print(resultList.value.to_list())
+        listToCompare = resultList.next
+        print(listToCompare.value.to_list())
+       # while listToCompare.next:
+        resultList.value = merge(resultList.value,listToCompare.value)
+        listToCompare = listToCompare.next
+        return resultList.value
+
+
+''' Create a NESTED LinkedList, where each node will be a simple LinkedList in itself'''
+
+nested_linked_list = NestedLinkedList(Node(linked_list)) # <-- Notice that we are passing a Node made up of a simple LinkedList object
+nested_linked_list.append(second_linked_list) # <-- Notice that we are passing a LinkedList object in the append() function here
+solution = nested_linked_list.flatten() # <-- returns A LinkedList object
+
+assert solution.to_list() == expected_list, f"list contents: {solution.to_list()}"
