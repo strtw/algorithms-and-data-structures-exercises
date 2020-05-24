@@ -54,7 +54,7 @@ def iscircular(linked_list):
         slowRunner = slowRunner.next
         fastRunner = fastRunner.next.next
      
-        if(fastRunner == slowRunner):
+        if(fastRunner == slowRunner):#fastRunner is needed to break out of the loop, otherwise slowRunner.next would always return true
             return True
     return False
 
