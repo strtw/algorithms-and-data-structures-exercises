@@ -65,24 +65,14 @@ def merge(list1, list2):
         node1 = list1.head.next
 
     
-    while node2.next or node1.next:#While either node has a next node
+    while node2 or node1:#While either node has a next node
         #Find the lesser node value from a list and append it to newList, and advance the node of this list
-        if(node1.value > node2.value):
-            newList.append(node2.value)
-            node2 = node2.next
+        if(not node1 or node1.value  > node2.value):#If node1 doesn't exist (which means we've already added all list1's values) or its value is greater than node2
+            newList.append(node2.value)#Append node2 value to the new list
+            node2 = node2.next #Advance the node. If it doesn't exist, then on the the next while loop check it will not enter the loop
         else:
             newList.append(node1.value)
             node1 = node1.next
-
-    #Handle the last node in each list
-    if(node1.value > node2.value):
-        newList.append(node2.value)
-        newList.append(node1.value)
-    else:
-        newList.append(node1.value)
-        newList.append(node2.value)
-
-    
     return newList
 
 # First Test scenario
@@ -90,13 +80,21 @@ def merge(list1, list2):
 linked_list = LinkedList(Node(1)) # <-- Notice that we are passing a Node made up of an integer
 linked_list.append(3) # <-- Notice that we are passing a numerical value as an argument in the append() function here 
 linked_list.append(5)
+linked_list.append(6)
+linked_list.append(7)
 
 ''' Create another simple LinkedList'''
 second_linked_list = LinkedList(Node(2))
 second_linked_list.append(4)
 second_linked_list.append(8)
+second_linked_list.append(9)
 
-expected_list = [1,2,3,4,5,8] # <-- Python list
+''' Create another simple LinkedList'''
+third_linked_list = LinkedList(Node(10))
+third_linked_list.append(13)
+third_linked_list.append(15)
+
+expected_list = [1,2,3,4,5,6,7,8,9,10,13,15] # <-- Python list
 
 
 ''' In a NESTED LinkedList object, each node will be a simple LinkedList in itself'''
@@ -107,9 +105,9 @@ class NestedLinkedList(LinkedList):
         print(resultList.value.to_list())
         listToCompare = resultList.next
         print(listToCompare.value.to_list())
-       # while listToCompare.next:
-        resultList.value = merge(resultList.value,listToCompare.value)
-        listToCompare = listToCompare.next
+        while listToCompare:
+            resultList.value = merge(resultList.value,listToCompare.value)
+            listToCompare = listToCompare.next
         return resultList.value
 
 
@@ -117,6 +115,10 @@ class NestedLinkedList(LinkedList):
 
 nested_linked_list = NestedLinkedList(Node(linked_list)) # <-- Notice that we are passing a Node made up of a simple LinkedList object
 nested_linked_list.append(second_linked_list) # <-- Notice that we are passing a LinkedList object in the append() function here
+nested_linked_list.append(third_linked_list) # <-- Notice that we are passing a LinkedList object in the append() function here
 solution = nested_linked_list.flatten() # <-- returns A LinkedList object
 
 assert solution.to_list() == expected_list, f"list contents: {solution.to_list()}"
+
+#TODO
+
